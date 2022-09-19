@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static Map<String, Tarjeta> initDB() {
         Cuenta c1 = new Cuenta(Moneda.SOLES, new BigDecimal(200), "089-298");
         Cuenta c2 = new Cuenta(Moneda.DOLARES, new BigDecimal(100), "087-673");
         Cliente cl1 = new Cliente("Christian", "Paz", "40859458");
@@ -16,7 +16,11 @@ public class Main {
         Tarjeta t1 = new Tarjeta(cl1, "98765432", 1234);
         Map<String, Tarjeta> baseDeDatos = new HashMap<>();
         baseDeDatos.put(t1.numero, t1);
+        return baseDeDatos;
+    }
+    public static void main(String[] args) {
 
+        Map<String, Tarjeta> baseDeDatos = initDB();
         Scanner input = new Scanner(System.in);
         System.out.println("Bienvenido a su banco, digite su numero de tarjeta o 0 para terminar");
         boolean fin = false;
