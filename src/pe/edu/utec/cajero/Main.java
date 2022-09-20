@@ -15,8 +15,8 @@ public class Main {
         Map<String, Tarjeta> baseDeDatos = cargar();
         if(baseDeDatos!=null)
             return baseDeDatos;
-        Cuenta c1 = new Cuenta(Moneda.SOLES, new BigDecimal(200), "089-298");
-        Cuenta c2 = new Cuenta(Moneda.DOLARES, new BigDecimal(100), "087-673");
+        Cuenta c1 = new Cuenta(Moneda.SOLES, 200.0f, "089-298");
+        Cuenta c2 = new Cuenta(Moneda.DOLARES, 100.0f, "087-673");
         Cliente cl1 = new Cliente("Christian", "Paz", "40859458");
         cl1.creaCuenta(c1);
         cl1.creaCuenta(c2);
@@ -60,8 +60,14 @@ public class Main {
                     idxcuenta = input.nextInt();
                     if(idxcuenta>0 && idxcuenta <= t.persona.cuentas.size()) {
                         Cuenta c = t.persona.cuentas.get(idxcuenta - 1);
-                        System.out.println("El saldo de su cuenta es: " + c.saldo + " " + c.moneda);
-
+                        System.out.println("Cuenta: " + c.toString());
+                        System.out.println("Digite el monto en soles a retirar");
+                        float monto = input.nextFloat();
+                        boolean resultado = c.retiro(monto, Moneda.SOLES);
+                        if(resultado == false) {
+                            System.out.println("Saldo insuficiente");
+                        }
+                        System.out.println("Cuenta: " + c.toString());
                     } else {
                         System.out.println("Seleccione una cuenta");
                     }
